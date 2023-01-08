@@ -4,13 +4,10 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const v1Routes = require("./server/v1");
-const uploadRoute = require('./server/modules/utils/upload-service/upload');
 
 app.use(cors());
-app.use(bodyParser.json({ limit: "50mb" }));
 // app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());
-
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -22,7 +19,6 @@ app.use(function (req, res, next) {
 });
 
 app.use("/api/v1", v1Routes);
-// app.use(uploadRoute);
 
 app.listen(process.env.PORT || 5050, () => {
   console.log(`Now listening on port ` + 5050);
