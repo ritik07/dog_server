@@ -6,7 +6,7 @@ exports.getUserSession = async (req, res, next) => {
     let { params } = req;
     let { user_id } = params;
 
-    const statement = `SELECT * from dog_user as du 
+    const statement = `SELECT du.*, dss.*, dss.id as session_id, da.*, da.id as address_id from dog_user as du 
     INNER JOIN dog_shopping_session as dss ON dss.user_id = ${user_id}
     INNER JOIN dog_address as da ON da.user_id = ${user_id}`;
 
@@ -19,10 +19,28 @@ exports.getUserSession = async (req, res, next) => {
             success: false,
           });
         } else if (result) {
+          let resultObj = result[0];
           res.status(200).json({
             status: 200,
             message: "User session found!",
-            data: result[0],
+            data: {
+              user_data: {
+                user_id: resultObj.user_id,
+                name: resultObj.name,
+                mobno: resultObj.mobno,
+                state: resultObj.state,
+                landmark: resultObj.landmark,
+                pincode: resultObj.pincode,
+                address: resultObj.address,
+                address_id: resultObj.address_id,
+                city: resultObj.city,
+              },
+              session_data: {
+                total: resultObj.total,
+                user_id: resultObj.user_id,
+                session_id: resultObj.session_id,
+              },
+            },
             success: true,
           });
         }

@@ -1,12 +1,9 @@
 const express = require("express");
 const cartController = require("./cart.controller");
-const {
-  createShoppingSession,
-  getUserCartSession,
-} = require("./cart.shoppingSession.controller");
 
 const router = express.Router();
 
-router.post("/create", createShoppingSession, cartController.createCart);
+router.post("/addtocart", cartController.createCart, cartController.updateCart);
+router.post("/getcartdetail", cartController.getCart);
 
 module.exports = router;
