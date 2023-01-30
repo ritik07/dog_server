@@ -5,6 +5,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const v1Routes = require("./server/v1");
 
+app.use(express.static('file'))
+
 app.use(cors());
 // app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json());

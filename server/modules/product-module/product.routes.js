@@ -5,6 +5,12 @@ const { postFile } = require("../utils/upload-service/mutler.service");
 
 const router = express.Router();
 
+router.get(
+  "/get/bycategoryid/:category_id",
+  productController.getProductsByCategoryId
+);
+router.get("/get", productController.getProducts);
+router.delete("/delete/:id", productController.delete);
 router.post(
   "/create",
   postFile,

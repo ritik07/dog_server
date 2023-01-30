@@ -6,6 +6,7 @@ let FILE_NAME = "";
 const imageStorage = multer.diskStorage({
   destination: "file", // Destination to store image
   filename: (req, file, cb) => {
+    console.log("file", file);
     FILE_NAME =
       file.fieldname + "_" + Date.now() + path.extname(file.originalname);
     cb(
@@ -29,7 +30,7 @@ exports.postFile = async (req, res, next) => {
     req.body.file_name = FILE_NAME;
     next();
     // res.status(200).json({ message: "OK" });
-    console.log(req.file, req.body);
+    console.log("service, upload", req.file, req.body);
   });
 };
 

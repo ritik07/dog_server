@@ -1,6 +1,35 @@
 const pool = require("../../../database");
 const logger = require("../../common/logger");
 
+exports.getUsers = async = (req, res, next) => {
+  try {
+    const statement = `SELECT du.name, du.mobno, du.id as user_id, da.* FROM dog_user as du
+    JOIN
+    dog_address AS da WHERE da.user_id = du.id;`;
+
+    pool.query(statement, async (err, result, fields) => {
+      try {
+        if (err) {
+          res.status(500).json({
+            status: 500,
+            message: err,
+            success: false,
+          });
+        } else if (result) {
+          res.status(200).json({
+            status: 200,
+            message: "User list fetched!",
+            data: result,
+            success: true,
+          });
+        }
+      } catch (error) {
+        logger.error(`${error}`);
+      }
+    });
+  } catch (error) {}
+};
+
 exports.getUserSession = async (req, res, next) => {
   try {
     let { params } = req;

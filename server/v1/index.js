@@ -10,6 +10,6 @@ router.use("/auth", authRoutes);
 router.use("/category", cateogryRoutes);
 router.use("/product", productRoutes);
 router.use("/cart", cartRoutes);
-router.use("/usersession", userRoutes);
+router.use("/user", userRoutes);
 
 module.exports = router;
