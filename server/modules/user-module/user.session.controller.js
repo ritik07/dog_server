@@ -37,7 +37,7 @@ exports.getUserSession = async (req, res, next) => {
 
     const statement = `SELECT du.*, dss.*, dss.id as session_id, da.*, da.id as address_id from dog_user as du 
     INNER JOIN dog_shopping_session as dss ON dss.user_id = ${user_id}
-    INNER JOIN dog_address as da ON da.user_id = ${user_id}`;
+    INNER JOIN dog_address as da ON da.user_id = ${user_id} where dss.active = 1`;
 
     pool.query(statement, async (err, result, fields) => {
       try {
