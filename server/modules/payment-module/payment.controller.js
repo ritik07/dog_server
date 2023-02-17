@@ -1,8 +1,8 @@
 const Razorpay = require("razorpay");
 
 const razorpay = new Razorpay({
-  key_id: "rzp_test_mI6RCty36XBHuT",
-  key_secret: "x9avu8E5x3T18EaNfe88erlC",
+  key_id: "rzp_live_aBs0ePN97PGbnR",
+  key_secret: "qYpJ0m2ucuWvKiGHAWYhttNx",
 });
 
 exports.processPayment = async (req, res, next) => {
@@ -11,7 +11,7 @@ exports.processPayment = async (req, res, next) => {
 
     const payment_capture = 1;
     const options = { amount, currency, payment_capture };
-    
+
     const response = await razorpay.orders.create(options);
 
     console.log("response", response);
